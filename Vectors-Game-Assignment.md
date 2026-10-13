@@ -1,5 +1,4 @@
-# CSCE 10204: Foundations of Programming II
-## Programming Assignment: The Vectors Game
+## CSCE 10204: Programming Assignment: The Vectors Game
 
 ### 1. Project Overview and Object-Oriented Requirements
 For this assignment, you will develop a console-based strategy game called **Vectors**, played on an 8x8 grid where a human player (`X`) competes against a computer player (`C`). 
