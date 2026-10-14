@@ -22,12 +22,12 @@ public class Vectors {
 		System.out.println("**************************************\n"
 				+ "- V E C T O R S                      *\n"
 				+ "**************************************");
-		System.out.printf("- High Score: %s – %d\n", "NAME", -54);
+		System.out.printf("- High Score: %9s – %-5d %6s\n", "NAME", -54, "*");
 		System.out.println("**************************************");
-		System.out.printf("- Player Score: %3d Last Round: %3d\n", -1, -1);
-		System.out.printf("- Computer Score: %3d Last Round: %3d\n", -1, -1);
+		System.out.printf("- Player Score: %5d Last Round %3d %-1s\n", -1, -1, "*");
+		System.out.printf("- Computer Score: %3d Last Round %3d %-1s\n", -1, -1, "*");
 		System.out.println("**************************************");
-		System.out.printf("- Turn %1d of %1d %20s\n", -1, -1, "*");
+		System.out.printf("- Turn %3d of %3d %20s\n", -1, -12, "*");
 		System.out.println("**************************************\n");
 		
 		
