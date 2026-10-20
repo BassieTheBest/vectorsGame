@@ -7,7 +7,8 @@ public class Driver {
 		Vectors game = new Vectors();
 		
 		game.setBoard();
-		game.display();
+		game.info();
+		game.move(250, 6);
 
 	}
 

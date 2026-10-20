@@ -1,9 +1,14 @@
 package game;
 
+import java.util.Scanner;
+
 public class Vectors {
 	private int row;
 	private int column;
 	private String[][] board = new String[8][8];
+	private int turn = 0;
+	Scanner scanner = new Scanner(System.in);
+	
 	public void run() {
 		
 	}
@@ -18,7 +23,7 @@ public class Vectors {
 		column = 0;
 	}
 	
-	public void display() {
+	public void info() {
 		System.out.println("**************************************\n"
 				+ "- V E C T O R S                      *\n"
 				+ "**************************************");
@@ -41,6 +46,24 @@ public class Vectors {
 			System.out.printf("| %d\n", row);
 		}
 		System.out.println("---------------------------------");
-		System.out.printf("Player(%s) Turn(row col): %d %d", "NAME", -1, -1);
+		System.out.printf("Player(%s) Turn(row col): %d %d\n\n", "NAME", -1, -1);
+	}
+	
+	public void move(int row, int column) {
+		while ((row < 0 || row > 7) || (column < 0 || column > 7)) {
+			System.out.print("Try again (row): ");
+			String tempRow = scanner.nextLine();
+			
+			System.out.print("Try again (column): ");
+			String tempCol = scanner.nextLine();
+			
+			if (tempRow.charAt(0) >= 48 && tempRow.charAt(0) <= 55) {
+				row = Integer.parseInt(tempRow);
+			}
+			if (tempCol.charAt(0) >= 48 && tempCol.charAt(0) <= 55) {
+				column = Integer.parseInt(tempCol);
+			}
+		}
+		System.out.println(row + " " + column);
 	}
 }
