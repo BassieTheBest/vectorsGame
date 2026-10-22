@@ -6,9 +6,17 @@ public class Driver {
 		
 		Vectors game = new Vectors();
 		
+		
 		game.setBoard();
 		game.info();
-		game.move(250, 6);
+		game.showBoard();
+		game.setFirst();
+		game.move();
+		game.showBoard();
+		game.move();
+		game.showBoard();
+		game.move();
+		game.showBoard();
 
 	}
 
