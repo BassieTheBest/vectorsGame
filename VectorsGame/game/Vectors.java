@@ -6,9 +6,12 @@ public class Vectors {
 	private int row;
 	private int column;
 	private String[][] board = new String[8][8];
-	private int turn = 0;
 	private String CP = "h";
 	Scanner scanner = new Scanner(System.in);
+	private int HScore = 0;
+	private int CScore = 0;
+	private int LHS;
+	private int LRS;
 	
 	public void run() {
 		
@@ -49,58 +52,197 @@ public class Vectors {
 	}
 	
 	public void showBoard() {
+		int tr;
+		int tc;
 		System.out.printf("%3d%4d%4d%4d%4d%4d%4d%4d\n", 0, 1, 2, 3, 4, 5, 6, 7);
-		for (row = 0; row < 8; row++) {
+		for (tr = 0; tr < 8; tr++) {
 			System.out.println("---------------------------------");
-			for (column = 0; column < 8; column++) {
-				System.out.printf("|%-3s", board[row][column]);
+			for (tc = 0; tc < 8; tc++) {
+				System.out.printf("|%-3s", board[tr][tc]);
 			}
-			System.out.printf("| %d\n", row);
+			System.out.printf("| %d\n", tr);
 		}
 		System.out.println("---------------------------------");
-		System.out.printf("Player(%s) Turn(row col): %d %d\n\n", "NAME", row, column);
+		if (CP.equals("h")) {
+			System.out.printf("Player(%s) Turn(row col): %d %d\n\n", "r", this.getRow(), this.getCol());
+		}
+		else {
+			System.out.printf("Player(%s) Turn(row col): %d %d\n\n", "h", this.getRow(), this.getCol());
+		}
+		
 	}
 	
 	public void move() {
+		boolean empty = false;
 		System.out.print("(row): ");
 		String tempRow = scanner.nextLine();
 		
 		System.out.print("(column): ");
 		String tempCol = scanner.nextLine();
 		
-		if (tempRow.charAt(0) >= 48 && tempRow.charAt(0) <= 55) {
-			row = Integer.parseInt(tempRow);
-		}
-		if (tempCol.charAt(0) >= 48 && tempCol.charAt(0) <= 55) {
-			column = Integer.parseInt(tempCol);
+		if (tempRow.length() == 1 && tempCol.length() == 1) {
+			if (tempRow.charAt(0) >= 48 && tempRow.charAt(0) <= 55) {
+			this.setRow(Integer.parseInt(tempRow));
+			}
+			if (tempCol.charAt(0) >= 48 && tempCol.charAt(0) <= 55) {
+			this.setCol(Integer.parseInt(tempCol));
+			}
+			
 		}
 		
-		while ((row < 0 || row > 7) || (column < 0 || column > 7)) {
+		while (!empty) {
+			while ((row < 0 || row > 7) || (column < 0 || column > 7)) {
 			System.out.print("Try again (row): ");
 			tempRow = scanner.nextLine();
 			
 			System.out.print("Try again (column): ");
 			tempCol = scanner.nextLine();
+			if (tempRow.length() == 1 && tempCol.length() == 1) {
+				if (tempRow.charAt(0) >= 48 && tempRow.charAt(0) <= 55) {
+				this.setRow(Integer.parseInt(tempRow));
+				}
+				if (tempCol.charAt(0) >= 48 && tempCol.charAt(0) <= 55) {
+				this.setCol(Integer.parseInt(tempCol));
+				}
+			}
 			
-			if (tempRow.charAt(0) >= 48 && tempRow.charAt(0) <= 55) {
-				row = Integer.parseInt(tempRow);
 			}
-			if (tempCol.charAt(0) >= 48 && tempCol.charAt(0) <= 55) {
-				column = Integer.parseInt(tempCol);
-			}
+			if (board[row][column].equals(" h") || board[row][column].equals(" r")) { // The space before the letter is to make sure it matches what we put down
+				this.setRow(-1);
+				this.setCol(-1);
+				}
+			else {
+				empty = true;
+				}
+			
 		}
+		
 		
 		
 		
 		if (CP.equals("h")) {
-			board[row][column] = " h";
+			board[getRow()][getCol()] = " h"; // To make it fit properly, the space is for
 			CP = "r";
 		}
 		else {
-			board[row][column] = " r";
+			board[getRow()][getCol()] = " r"; // To make it fit properly, the space is for
 			CP = "h";
 		}
 	}
 	
+	public void setRow(int row) {
+		this.row = row;
+	}
+	public int getRow() {
+		return row;
+	}
 	
+	public void setCol(int col) {
+		this.column = col;
+	}
+	public int getCol() {
+		return column;
+	}
+	
+	
+	public void score() {
+		int HPointCounter = 0;
+		int CPointCounter = 0;
+		
+		LHS = HScore;
+		LRS = CScore;
+		HScore = 0;
+		CScore = 0;
+		
+		for (row = 0; row < 8; row++) {
+			for (column = 0; column <8; column++) {
+				if (board[row][column].equals(" h")) {
+					HPointCounter++;
+					if (HPointCounter == 5) {
+						HScore += 10;
+					}
+					else if (HPointCounter == 4) {
+						HScore += 6;
+					}
+					else if (HPointCounter == 3) {
+						HScore += 4;
+					}
+					if (column == 7) {
+						HPointCounter = 0;
+					}
+				}
+				else {
+					HPointCounter = 0;
+				}
+				
+				if (board[row][column].equals(" r")) {
+					CPointCounter++;
+					if (CPointCounter == 5) {
+						CScore += 10;
+					}
+					else if (CPointCounter == 4) {
+						CScore += 6;
+					}
+					else if (CPointCounter == 3) {
+						CScore += 4;
+					}
+					if (column == 7) {
+						CPointCounter = 0;
+					}
+				}
+				else {
+					CPointCounter = 0;
+				}
+				
+				
+			}
+			
+		}
+		
+		for (column = 0; column < 8; column++) {
+			for (row = 0; row <8; row++) {
+				if (board[row][column].equals(" h")) {
+					HPointCounter++;
+					if (HPointCounter == 5) {
+						HScore += 10;
+					}
+					else if (HPointCounter == 4) {
+						HScore += 6;
+					}
+					else if (HPointCounter == 3) {
+						HScore += 4;
+					}
+					if (row == 7) {
+						HPointCounter = 0;
+					}
+				}
+				else {
+					HPointCounter = 0;
+				}
+				
+				if (board[row][column].equals(" r")) {
+					CPointCounter++;
+					if (CPointCounter == 5) {
+						CScore += 10;
+					}
+					else if (CPointCounter == 4) {
+						CScore += 6;
+					}
+					else if (CPointCounter == 3) {
+						CScore += 4;
+					}
+					if (row == 7) {
+						CPointCounter = 0;
+					}
+				}
+				else {
+					CPointCounter = 0;
+				}
+				
+				
+			}
+			
+		}
+		System.out.println("R: " + CScore + " CC: " + CPointCounter + " H: " + HScore + " HC: " + HPointCounter);
+	}
 }

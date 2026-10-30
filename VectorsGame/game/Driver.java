@@ -13,10 +13,37 @@ public class Driver {
 		game.setFirst();
 		game.move();
 		game.showBoard();
+		game.score();
 		game.move();
 		game.showBoard();
+		game.score();
 		game.move();
 		game.showBoard();
+		game.score();
+		game.move();
+		game.showBoard();
+		game.score();
+		game.move();
+		game.showBoard();
+		game.score();
+		game.move();
+		game.showBoard();
+		game.score();
+		game.move();
+		game.showBoard();
+		game.score();
+		game.move();
+		game.showBoard();
+		game.score();
+		game.move();
+		game.showBoard();
+		game.score();
+		game.move();
+		game.showBoard();
+		game.score();
+		game.move();
+		game.showBoard();
+		game.score();
 
 	}
 
