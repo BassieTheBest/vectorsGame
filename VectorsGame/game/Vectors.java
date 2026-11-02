@@ -159,10 +159,10 @@ public class Vectors {
 				if (board[row][column].equals(" h")) {
 					HPointCounter++;
 					if (HPointCounter == 5) {
-						HScore += 10;
+						HScore += 4;
 					}
 					else if (HPointCounter == 4) {
-						HScore += 6;
+						HScore += 2;
 					}
 					else if (HPointCounter == 3) {
 						HScore += 4;
@@ -178,10 +178,10 @@ public class Vectors {
 				if (board[row][column].equals(" r")) {
 					CPointCounter++;
 					if (CPointCounter == 5) {
-						CScore += 10;
+						CScore += 4;
 					}
 					else if (CPointCounter == 4) {
-						CScore += 6;
+						CScore += 2;
 					}
 					else if (CPointCounter == 3) {
 						CScore += 4;
@@ -204,10 +204,10 @@ public class Vectors {
 				if (board[row][column].equals(" h")) {
 					HPointCounter++;
 					if (HPointCounter == 5) {
-						HScore += 10;
+						HScore += 4;
 					}
 					else if (HPointCounter == 4) {
-						HScore += 6;
+						HScore += 2;
 					}
 					else if (HPointCounter == 3) {
 						HScore += 4;
@@ -223,10 +223,10 @@ public class Vectors {
 				if (board[row][column].equals(" r")) {
 					CPointCounter++;
 					if (CPointCounter == 5) {
-						CScore += 10;
+						CScore += 4;
 					}
 					else if (CPointCounter == 4) {
-						CScore += 6;
+						CScore += 2;
 					}
 					else if (CPointCounter == 3) {
 						CScore += 4;
