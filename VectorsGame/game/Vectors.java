@@ -12,10 +12,21 @@ public class Vectors {
 	private int CScore = 0;
 	private int LHS;
 	private int LRS;
+	private int turns = 15;
+	private int curTurn = 0;
 	
 	public void run() {
-		
+		setFirst();
+		setBoard();
+		turnAmount();
+		while (curTurn < turns) {
+			info();
+			showBoard();
+			move();
+			score();	
+		}
 	}
+	
 	
 	public void setFirst() {
 		System.out.print("Who foes first: Human (h) or Robot (r): ");
@@ -43,10 +54,10 @@ public class Vectors {
 				+ "**************************************");
 		System.out.printf("- High Score: %9s – %-5d %6s\n", "NAME", -54, "*");
 		System.out.println("**************************************");
-		System.out.printf("- Player Score: %5d Last Round %3d %-1s\n", -1, -1, "*");
-		System.out.printf("- Computer Score: %3d Last Round %3d %-1s\n", -1, -1, "*");
+		System.out.printf("- Player Score: %5d Last Round %3d %-1s\n", HScore, LHS, "*");
+		System.out.printf("- Computer Score: %3d Last Round %3d %-1s\n", CScore, LRS, "*");
 		System.out.println("**************************************");
-		System.out.printf("- Turn %3d of %3d %20s\n", -1, -12, "*");
+		System.out.printf("- Turn %3d of %3d %20s\n", curTurn, turns, "*");
 		System.out.println("**************************************\n");
 		
 	}
@@ -63,6 +74,7 @@ public class Vectors {
 			System.out.printf("| %d\n", tr);
 		}
 		System.out.println("---------------------------------");
+		System.out.println("SB: " + this.row + " " + this.column);
 		if (CP.equals("h")) {
 			System.out.printf("Player(%s) Turn(row col): %d %d\n\n", "r", this.getRow(), this.getCol());
 		}
@@ -70,6 +82,33 @@ public class Vectors {
 			System.out.printf("Player(%s) Turn(row col): %d %d\n\n", "h", this.getRow(), this.getCol());
 		}
 		
+	}
+	
+	public void turnAmount() {
+		boolean good = false;
+		int index;
+		int counter = 0;
+		System.out.println("How many turns do you want: ");
+		String tempAmount = scanner.nextLine();
+		
+		while (!good) {
+			for (index = 0; index < tempAmount.length(); index++) {
+				if (tempAmount.charAt(index) >= 48 && tempAmount.charAt(index) <= 57) {
+					counter++;
+				}
+			}
+			if (counter == tempAmount.length() && counter <= 6) {
+				turns = Integer.parseInt(tempAmount);
+				good = true;
+			}
+			else {
+				System.out.println("Didn't work\nHow many turns do you want: ");
+				tempAmount = scanner.nextLine();
+				counter = 0;
+			}
+			
+		}
+		System.out.println(turns);
 	}
 	
 	public void move() {
@@ -114,11 +153,9 @@ public class Vectors {
 			else {
 				empty = true;
 				}
-			
 		}
 		
-		
-		
+		curTurn++;
 		
 		if (CP.equals("h")) {
 			board[getRow()][getCol()] = " h"; // To make it fit properly, the space is for
@@ -128,6 +165,7 @@ public class Vectors {
 			board[getRow()][getCol()] = " r"; // To make it fit properly, the space is for
 			CP = "h";
 		}
+		System.out.println("M: " + row + " " + column);
 	}
 	
 	public void setRow(int row) {
@@ -154,9 +192,12 @@ public class Vectors {
 		HScore = 0;
 		CScore = 0;
 		
-		for (row = 0; row < 8; row++) {
-			for (column = 0; column <8; column++) {
-				if (board[row][column].equals(" h")) {
+		int tr;
+		int tc;
+		
+		for (tr = 0; tr < 8; tr++) {
+			for (tc = 0; tc <8; tc++) {
+				if (board[tr][tc].equals(" h")) {
 					HPointCounter++;
 					if (HPointCounter == 5) {
 						HScore += 4;
@@ -167,7 +208,7 @@ public class Vectors {
 					else if (HPointCounter == 3) {
 						HScore += 4;
 					}
-					if (column == 7) {
+					if (tc == 7) {
 						HPointCounter = 0;
 					}
 				}
@@ -175,7 +216,7 @@ public class Vectors {
 					HPointCounter = 0;
 				}
 				
-				if (board[row][column].equals(" r")) {
+				if (board[tr][tc].equals(" r")) {
 					CPointCounter++;
 					if (CPointCounter == 5) {
 						CScore += 4;
@@ -186,22 +227,19 @@ public class Vectors {
 					else if (CPointCounter == 3) {
 						CScore += 4;
 					}
-					if (column == 7) {
+					if (tc == 7) {
 						CPointCounter = 0;
 					}
 				}
 				else {
 					CPointCounter = 0;
-				}
-				
-				
+				}	
 			}
-			
 		}
 		
-		for (column = 0; column < 8; column++) {
-			for (row = 0; row <8; row++) {
-				if (board[row][column].equals(" h")) {
+		for (tc = 0; tc < 8; tc++) {
+			for (tr = 0; tr <8; tr++) {
+				if (board[tr][tc].equals(" h")) {
 					HPointCounter++;
 					if (HPointCounter == 5) {
 						HScore += 4;
@@ -212,7 +250,7 @@ public class Vectors {
 					else if (HPointCounter == 3) {
 						HScore += 4;
 					}
-					if (row == 7) {
+					if (tr == 7) {
 						HPointCounter = 0;
 					}
 				}
@@ -220,7 +258,7 @@ public class Vectors {
 					HPointCounter = 0;
 				}
 				
-				if (board[row][column].equals(" r")) {
+				if (board[tr][tc].equals(" r")) {
 					CPointCounter++;
 					if (CPointCounter == 5) {
 						CScore += 4;
@@ -231,18 +269,15 @@ public class Vectors {
 					else if (CPointCounter == 3) {
 						CScore += 4;
 					}
-					if (row == 7) {
+					if (tr == 7) {
 						CPointCounter = 0;
 					}
 				}
 				else {
 					CPointCounter = 0;
 				}
-				
-				
 			}
-			
 		}
-		System.out.println("R: " + CScore + " CC: " + CPointCounter + " H: " + HScore + " HC: " + HPointCounter);
+		System.out.println("S: " + row + " " + column);
 	}
 }

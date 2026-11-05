@@ -6,44 +6,8 @@ public class Driver {
 		
 		Vectors game = new Vectors();
 		
+		game.run();
 		
-		game.setBoard();
-		game.info();
-		game.showBoard();
-		game.setFirst();
-		game.move();
-		game.showBoard();
-		game.score();
-		game.move();
-		game.showBoard();
-		game.score();
-		game.move();
-		game.showBoard();
-		game.score();
-		game.move();
-		game.showBoard();
-		game.score();
-		game.move();
-		game.showBoard();
-		game.score();
-		game.move();
-		game.showBoard();
-		game.score();
-		game.move();
-		game.showBoard();
-		game.score();
-		game.move();
-		game.showBoard();
-		game.score();
-		game.move();
-		game.showBoard();
-		game.score();
-		game.move();
-		game.showBoard();
-		game.score();
-		game.move();
-		game.showBoard();
-		game.score();
 
 	}
 
